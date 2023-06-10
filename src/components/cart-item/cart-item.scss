@@ -1,0 +1,41 @@
+.cart-item-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .td-image{
+      width: 10%;
+      .image{
+        width: 100%;
+      }
+    }
+
+    .td-name{
+      width: 40%;
+      .name{
+        width: 100%;
+      }
+    }
+
+    .td-price{
+      width: 35%;
+      text-align: left;
+      .price{
+        width: 100%;
+      }
+    }
+
+  
+    .item-details {
+      width: 70%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 10px 20px;
+  
+      .name {
+        font-size: 16px;
+      }
+    }
+  }

@@ -3,11 +3,17 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { CartProvider } from './context/cart.context';
+import { Elements } from '@stripe/react-stripe-js';
+import { stripePromise } from './components/util/stripe.utils';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <CartProvider>
+      <Elements stripe={ stripePromise }>
+        <App />
+      </Elements>
+    </CartProvider>
   </React.StrictMode>
 );
 

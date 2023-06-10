@@ -1,0 +1,10 @@
+.product-container{
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 50px;
+    row-gap: 50px;
+    text-align: center;
+    align-items: center;
+
+}

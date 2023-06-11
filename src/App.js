@@ -22,7 +22,7 @@ function App() {
                 <Order/>
               </Route>
 
-              <Route path='/order/checkout' exact > 
+              <Route path='/order/checkout/:orderId' exact > 
                 <Checkout/>
               </Route>
 

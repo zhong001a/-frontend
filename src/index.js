@@ -6,14 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import { CartProvider } from './context/cart.context';
 import { Elements } from '@stripe/react-stripe-js';
 import { stripePromise } from './components/util/stripe.utils';
+import { ProductsProvider } from './context/products.context';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <CartProvider>
-      <Elements stripe={ stripePromise }>
-        <App />
-      </Elements>
-    </CartProvider>
+    <ProductsProvider>
+      <CartProvider>
+        <Elements stripe={ stripePromise }>
+          <App />
+        </Elements>
+      </CartProvider>
+    </ProductsProvider>
   </React.StrictMode>
 );
 

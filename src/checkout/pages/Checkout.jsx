@@ -1,45 +1,30 @@
-import React,{ useContext, useEffect, useState } from 'react';
-import { CartContext } from '../../context/cart.context';
+import React,{ useEffect, useState } from 'react';
 import './Checkout.scss';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
-import CheckoutItem from '../component/checkout-item.component';
+import CheckoutList from '../component/checkout-list.component';
 import Payments from '../../components/payment/payment-component';
 import axios from 'axios';
 const Checkout = () => {
-
+ 
   const orderId = useParams().orderId;
-  const { cartItems, cartTotal } = useContext(CartContext);
+
   const [ orderProduct, setorderProduct ] = useState([])
-  const [ products, setProducts ] = useState([])
 
-  const fecthProduct = (id) =>{
-    // axios.get(`http://localhost:3010/${id}`)
-    console.log("product")
-    console.log(id)
-  }
-
-  const getIdProduct = () =>{
-    orderProduct.map(({id}) => { 
-      fecthProduct(id)
-    })
-  }
 
   useEffect(()=>{
     axios.get(`http://localhost:4040/${orderId}`)
     .then((response) => {
-      setorderProduct(response.data.products)
+      setorderProduct(response.data)
     })
     .catch((err) => {
       console.log(err)
     })
+  },[orderId])
 
-    fecthProduct()
+  const productId = orderProduct.products.map((item) => item.id)
 
-  },[])
-  
   return (
     <div className='checkout-container'>
-      {JSON.stringify(orderProduct)}
       <div className='checkout-header'>
         <div className='header-block'>
           <span>Product</span>
@@ -55,10 +40,15 @@ const Checkout = () => {
         </div>
 
       </div>
-      {/* {order.map((cartItem) => (
-        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
-      ))} */}
-      <div className='total'>TOTAL: ${cartTotal.toLocaleString()}</div>
+
+      {
+        productId.map((item)=>(
+          <CheckoutList key={item.id} id={item.id} />
+
+        ))
+      }
+
+      <div className='total'>TOTAL: ฿ {orderProduct.totalPrice}</div>
         <Payments/>
     </div>
   );

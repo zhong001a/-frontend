@@ -1,14 +1,13 @@
 import React from 'react';
-
-
 import './checkout-item.styles.scss';
 
-const CheckoutItem = ({ cartItem }) => {
-  const { name, imageUrl, price, quantity } = cartItem;
-
+const CheckoutItem = ({ items }) => {
+  const { imageUrl, name, quantity, price } = items
 
   return (
     <div className='checkout-item-container'>
+    
+
       <div className='image-container'>
         <img src={imageUrl} alt={`${name}`} />
       </div>
@@ -18,7 +17,7 @@ const CheckoutItem = ({ cartItem }) => {
         <span className='value'>{quantity}</span>
 
       </span>
-      <span className='price'> {price.toLocaleString()}</span>
+      <span className='price'> {price.toLocaleString()}</span> 
     </div>
   );
 };

@@ -15,7 +15,7 @@ const Order = () => {
   useEffect(()=>{
     setProducts(
       cartItems.map((item) => ({
-        id:item.id,
+        id:item._id,
         quantity: item.quantity,
         price: item.price
       }))
@@ -28,7 +28,6 @@ const Order = () => {
     axios.post("http://localhost:4040/",{ products, totalPrice:cartTotal })
     .then((response)=>{
 
-      console.log(response.data)
       usehistory.push(`/order/checkout/${response.data._id}`)
     })
     .catch((err) =>{

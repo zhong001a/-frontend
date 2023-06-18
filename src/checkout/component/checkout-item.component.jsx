@@ -17,7 +17,7 @@ const CheckoutItem = ({ items }) => {
         <span className='value'>{quantity}</span>
 
       </span>
-      <span className='price'> {price.toLocaleString()}</span> 
+      <span className='price'> {price}</span> 
     </div>
   );
 };

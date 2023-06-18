@@ -8,18 +8,19 @@ const Checkout = () => {
  
   const orderId = useParams().orderId;
 
-  const [ orderProduct, setorderProduct ] = useState([])
+  const [ orderProduct, setorderProduct ] = useState()
 
-
-  useEffect(()=>{
-    axios.get(`http://localhost:4040/${orderId}`)
-    .then((response) => {
-      setorderProduct(response.data)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  },[orderId])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3030/${orderId}`);
+        setorderProduct(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []);
 
   const productId = orderProduct.products.map((item) => item.id)
 
@@ -38,18 +39,18 @@ const Checkout = () => {
         <div className='header-block'>
           <span>Price</span>
         </div>
-
       </div>
 
+
       {
-        productId.map((item)=>(
-          <CheckoutList key={item.id} id={item.id} />
+        productId.map((id)=>(
+          <CheckoutList key={id} id={id} />
 
         ))
       }
 
-      <div className='total'>TOTAL: ฿ {orderProduct.totalPrice}</div>
-        <Payments/>
+      {/* <div className='total'>TOTAL: ฿ {orderProduct.totalPrice}</div> */}
+        {/* <Payments/> */}
     </div>
   );
 };
